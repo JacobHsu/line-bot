@@ -2,7 +2,7 @@
  
 請先加入好友 行動條碼
 
-![alt tag](https://qr-official.line.me/M/X59K430wql.png)
+![alt tag](https://imgur.com/kZAICSr.png)
 
 或是手機直接點選 [https://line.me/R/ti/p/%40cfh8893x](https://line.me/R/ti/p/%40cfh8893x)
 
