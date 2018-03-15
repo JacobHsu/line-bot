@@ -36,6 +36,7 @@ requirements.txt 環境需要那些其他的套件
 runtime.txt 想要指定的 python 版本  
 
 [requirements.txt](https://devcenter.heroku.com/articles/python-pip)  
+[Logging](https://devcenter.heroku.com/articles/logging)  
 
 # Python 3
 
@@ -46,3 +47,4 @@ runtime.txt 想要指定的 python 版本
 # API
 
 [currencylayer API](https://currencylayer.com/documentation)  
+[Places API Web Service](https://developers.google.com/places/web-service/search?hl=zh-tw)  
