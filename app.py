@@ -4,7 +4,7 @@ import requests
 import json
 import random
 from bs4 import BeautifulSoup
-
+import movie
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -70,21 +70,6 @@ def ptt_hot():
         if data.find('a')['href'] == "796-59l9": #[公告]
             break
         content += '{}\n{}\n\n'.format(title, link)
-    return content
-
-def movie():
-    target_url = 'http://www.atmovies.com.tw/movie/next/0/'
-    rs = requests.session()
-    res = rs.get(target_url, verify=False)
-    res.encoding = 'utf-8'
-    soup = BeautifulSoup(res.text, 'html.parser')
-    content = ""
-    for index, data in enumerate(soup.select('ul.filmNextListAll a')):
-        if index == 5:
-            return content
-        title = data.text.replace('\t', '').replace('\r', '')
-        link = "http://www.atmovies.com.tw" + data['href']
-        content += '{}\n{}\n'.format(title, link)
     return content
 
 def currencylayer():
@@ -157,8 +142,10 @@ def handle_message(event):
         content = apple_news()
     elif event.message.text == "近期熱門廢文":  
         content = ptt_hot()  
-    elif event.message.text == "近期上映電影":  
-        content = movie()
+    elif event.message.text == "本週新片":  
+        content = movie.truemovie()
+    elif event.message.text == "開演":  
+        content = movie.atmovies()
     elif event.message.text == "今日即期匯率":  
         content = currency()
     elif event.message.text == "吃什麼":  
