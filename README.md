@@ -19,6 +19,10 @@
 [Getting started with the Messaging API](https://developers.line.me/console/channel/1566062594/basic/)  
 [line-bot-sdk-python](https://github.com/line/line-bot-sdk-python)  
 
+[message-types](https://developers.line.me/en/docs/messaging-api/message-types/)  
+[emoji list](https://developers.line.me/media/messaging-api/emoji-list.pdf)  
+[LINE BOT の emoticon](https://qiita.com/Repomn/items/b991f20e4fecd0577d4b)  
+
 ### Channel settings
 
 Channel secret  

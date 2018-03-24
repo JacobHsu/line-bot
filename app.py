@@ -2,8 +2,8 @@ from flask import Flask, request, abort
 import configparser
 import requests
 import json
-import random
 from bs4 import BeautifulSoup
+import maps
 import movie
 
 from linebot import (
@@ -13,7 +13,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, LocationMessage,
 )
 
 app = Flask(__name__)
@@ -102,31 +102,6 @@ def currency():
             print('人民幣(CNY)' , data.text)
     return content
 
-
-def nearbysearch():
-    rand = random.random()*0.01
-    point  = ("%.6f" % rand)
-    lat = int(25) + float(point)
-    rand = random.randint(450000,630000)
-    print(rand)
-    lng = "121." + str(rand)
-    print(lat,lng)
-    target_url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+str(lat)+','+str(lng)+'&radius=500&type=restaurant&key='+config['places_api']['YOUR_API_KEY']
-    response = requests.get(target_url)
-    data = response.text
-    parsed = json.loads(data)
-    restaurant = parsed['results']
-    if restaurant == []:
-        print('nearbysearch')
-        return str(lat)+","+str(lng)+"請重新搜尋"
-    content = ""
-    for index, data in enumerate(restaurant): 
-        if index < 5:
-            name = data['name'].replace(" ",'%20')
-            print(name)
-            content += 'https://www.google.com.tw/search?q='+str(name)+"\n"
-    return content[:-1]
-
 def pm25():
     target_url = 'http://opendata2.epa.gov.tw/AQX.json'
     response = requests.get(target_url)
@@ -149,7 +124,7 @@ def handle_message(event):
     elif event.message.text == "今日即期匯率":  
         content = currency()
     elif event.message.text == "吃什麼":  
-        content = nearbysearch()
+        content = maps.randombysearch()
     elif( len(event.message.text) == 4 and event.message.text.isdigit() ):
         content = 'https://goodinfo.tw/StockInfo/StockDividendSchedule.asp?STOCK_ID='+ event.message.text
     elif( len(event.message.text) == 2 and event.message.text.isdigit() ):
@@ -164,6 +139,15 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=content))
 
+
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_message(event):
+    lat = event.message.latitude
+    lng = event.message.longitude
+    content = maps.nearbysearch(lat,lng) 
+    line_bot_api.reply_message(
+    event.reply_token,
+    TextSendMessage(text=content))
 
 if __name__ == "__main__":
     app.run()
