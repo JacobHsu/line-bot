@@ -48,7 +48,22 @@ runtime.txt 想要指定的 python 版本
 [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) is a Python library for pulling data out of HTML and XML files.  
 [PyPI - the Python Package Index](https://pypi.python.org/pypi)  
 
+# Package
+
+[oauth2client](https://pypi.python.org/pypi/oauth2client) 
+[gspread](https://pypi.python.org/pypi/gspread/2.0.0)  
+> 啟用 Google Sheets API 
+
 # API
 
 [currencylayer API](https://currencylayer.com/documentation)  
 [Places API Web Service](https://developers.google.com/places/web-service/search?hl=zh-tw)  
+
+### [Google Spreadsheets Python API](https://github.com/burnash/gspread)  
+
+1.[Google Developers Console](https://console.developers.google.com/project) 建立 project  
+2.啟用 Google Sheets API  
+3.在 Credentials 頁面按下 Create credentials -> Service account key  
+4.選擇 JSON 作為 Key type  
+
+

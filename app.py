@@ -5,6 +5,8 @@ import json
 from bs4 import BeautifulSoup
 import maps
 import movie
+import gsheets
+import time
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -73,7 +75,7 @@ def ptt_hot():
     return content
 
 def currencylayer():
-    target_url = 'http://apilayer.net/api/live?access_key='+config['currencylayer']['Access_Key']+'&currencies=TWD,JPY,CNY'
+    target_url = 'http://apilayer.net/api/live?access_key='+config['currencylayer']['access_key']+'&currencies=TWD,JPY,CNY'
     response = requests.get(target_url)
     data = response.text
     parsed = json.loads(data)
@@ -112,6 +114,15 @@ def pm25():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+
+    auth_json_path = config['gspread']['auth_json_path']
+    #https://docs.google.com/spreadsheets/d/{key}/edit
+    spreadsheet_key = config['gspread']['spreadsheet_key']
+    gss_scopes = ['https://spreadsheets.google.com/feeds']
+    today = time.ctime()
+    gss_client = gsheets.auth_gss_client(auth_json_path, gss_scopes)
+    gsheets.update_sheet(gss_client, spreadsheet_key, today, event.message.text,
+                     event.message.id)
 
     if event.message.text == "蘋果即時新聞":
         content = apple_news()

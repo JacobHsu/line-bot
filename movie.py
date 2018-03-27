@@ -12,7 +12,7 @@ def truemovie():
 
     today = datetime.datetime.now()
     tableid= int(today.month) +115
-    week = int(today.day)%7 
+    week = int( int(today.day) /5 ) -1
 
     for index, data in enumerate(soup.select('#table'+str(tableid)+' td a')):
         movie = data.text.replace('\n', '').replace('\u3000', '').replace(" ", "").replace('\t', '').replace('\r', '')                            
