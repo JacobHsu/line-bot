@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import maps
 import movie
 import gsheets
+import beauty
 import time
 
 from linebot import (
@@ -128,10 +129,10 @@ def handle_message(event):
         content = apple_news()
     elif event.message.text == "近期熱門廢文":  
         content = ptt_hot()  
-    elif event.message.text == "本週新片":  
-        content = movie.truemovie()
-    elif event.message.text == "開演":  
+    elif event.message.text == "近期上映":  
         content = movie.atmovies()
+    elif event.message.text == "新片":  
+        content = movie.truemovie() 
     elif event.message.text == "今日即期匯率":  
         content = currency()
     elif event.message.text == "吃什麼":  
@@ -143,7 +144,9 @@ def handle_message(event):
     elif event.message.text == "USD":  
         content = currencylayer()
     elif event.message.text == "空氣":  
-        content = pm25()      
+        content = pm25()
+    elif event.message.text == "正妹": 
+        content = beauty.ptt_beauty()      
     else:
         content =  event.message.text + ' by bot'
     line_bot_api.reply_message(
