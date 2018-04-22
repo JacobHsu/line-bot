@@ -33,6 +33,12 @@ Webhook URL  `https://jacobhsu-line-bot.herokuapp.com/callback`
 
 # Heroku 
 
+Deploying code  
+`$heroku login`   
+`$git add .`  
+`$git commit -am "amend"`  
+`$git push heroku master`   
+
 [Getting Started on Heroku with Python](https://devcenter.heroku.com/articles/getting-started-with-python#deploy-the-app)  
 
 > Procfile 如何啟動這個 web app `app.py`  

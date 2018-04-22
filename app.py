@@ -5,6 +5,7 @@ import json
 from bs4 import BeautifulSoup
 import maps
 import movie
+import book
 import gsheets
 import beauty
 import time
@@ -56,7 +57,9 @@ def apple_news():
             return content
 
         link = data['href']
-        content += '{}\n\n'.format(link)
+        notnews = link.find('entertainment')
+        if notnews == -1:
+            content += '{}\n\n'.format(link)
     return content
 
 def ptt_hot():
@@ -145,6 +148,8 @@ def handle_message(event):
         content = currencylayer()
     elif event.message.text == "空氣":  
         content = pm25()
+    elif event.message.text == "書": 
+        content = book.books() + book.kobo() + book.taaze()    
     elif event.message.text == "正妹": 
         content = beauty.ptt_beauty()      
     else:
