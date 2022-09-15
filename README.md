@@ -31,7 +31,7 @@ Channel access token
 Use webhooks `Enabled`  
 Webhook URL  `https://jacobhsu-line-bot.herokuapp.com/callback`  
 
-# Heroku 
+## Heroku 
 
 Deploying code  
 `$heroku login`   

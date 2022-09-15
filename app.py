@@ -116,6 +116,16 @@ def pm25():
     content = results[3]['SiteName'] + ' PM2.5: '+ results[3]['PM2.5'] + ',狀態: ' + results[3]['Status']
     return content
 
+def larp():
+    content = {
+        "type": "location",
+        "title": "夢迴",
+        "address": "106台北市大安區忠孝東路三段207號3樓",
+        "latitude": 35.65910807942215,
+        "longitude": 139.70372892916203
+    }
+    return content
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
@@ -152,6 +162,8 @@ def handle_message(event):
         content = book.books() + book.kobo() + book.taaze()    
     elif event.message.text == "正妹": 
         content = beauty.ptt_beauty()      
+    elif event.message.text == "larp": 
+        content = larp()     
     else:
         content =  event.message.text + ' by bot'
     line_bot_api.reply_message(
